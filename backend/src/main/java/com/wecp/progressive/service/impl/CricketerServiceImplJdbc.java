@@ -1,7 +1,9 @@
 package com.wecp.progressive.service.impl;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,29 +19,36 @@ public class CricketerServiceImplJdbc implements CricketerService {
     }
 
     @Override
-    public List<Cricketer> getAllCricketers() {
-      return List.of();
+    public List<Cricketer> getAllCricketers() throws SQLException{
+      return cricketerDAO.getAllCricketers();
     }
 
     @Override
-    public Integer addCricketer(Cricketer cricketer) {
-       return -1;
+    public Integer addCricketer(Cricketer cricketer) throws SQLException{
+       return cricketerDAO.addCricketer(cricketer);
     }
 
     @Override
-    public List<Cricketer> getAllCricketersSortedByExperience() {
-        return List.of();
+    public List<Cricketer> getAllCricketersSortedByExperience() throws SQLException{
+        List<Cricketer> sortedCricketers=cricketerDAO.getAllCricketers();
+        if(!sortedCricketers.isEmpty())
+        {
+            sortedCricketers.sort(Comparator.comparing(Cricketer::getExperience));
+        }
+        return sortedCricketers;
     }
     @Override
-    public void updateCricketer(Cricketer cricketer) {
+    public void updateCricketer(Cricketer cricketer) throws SQLException{
+        cricketerDAO.updateCricketer(cricketer);
     }
     @Override
-    public void deleteCricketer(int cricketerId) {  
+    public void deleteCricketer(int cricketerId) throws SQLException{
+        cricketerDAO.deleteCricketer(cricketerId);  
+
     }
     @Override
-    public Cricketer getCricketerById(int cricketerId) {
-     return null;
-    
+    public Cricketer getCricketerById(int cricketerId) throws SQLException{
+     return cricketerDAO.getCricketerById(cricketerId);
 
 }
 }
