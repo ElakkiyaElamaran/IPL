@@ -1,16 +1,25 @@
 package com.wecp.progressive.entity;
 
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "matches")
 public class Match {
-private int matchId;
-private int firstTeamId;
-private int secondTeamId;
-private Date matchDate;
-private String venue;
-private String result;
-private String status;
-private int winnerTeamId;
+ @Id
+ @GeneratedValue(strategy = GenerationType.IDENTITY)
+ private int matchId;
+ private int firstTeamId;
+ private int secondTeamId;
+ private Date matchDate;
+ private String venue;
+ private String result;
+ private String status;
+ private int winnerTeamId;
 public Match() {
 }
 public Match(int matchId, int firstTeamId, int secondTeamId, Date matchDate, String venue, String result, String status,
@@ -72,5 +81,5 @@ public int getWinnerTeamId() {
 public void setWinnerTeamId(int winnerTeamId) {
     this.winnerTeamId = winnerTeamId;
 }
-
+ 
 }
