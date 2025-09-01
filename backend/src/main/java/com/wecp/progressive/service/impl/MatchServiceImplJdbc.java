@@ -7,23 +7,27 @@ import com.wecp.progressive.dao.MatchDAO;
 import com.wecp.progressive.entity.Match;
 import com.wecp.progressive.service.MatchService;
 
-public class MatchServiceImplJdbc  implements MatchService{
+public class MatchServiceImplJdbc implements MatchService {
 
-  private MatchDAO matchDAO;
-  
-    public MatchServiceImplJdbc(MatchDAO matchDAO)throws SQLException {
-    this.matchDAO = matchDAO;
-  }
+    private MatchDAO matchDAO;
 
-
-    @Override
-    public Integer addMatch(Match match) throws SQLException{
-      return matchDAO.addMatch(match);
+    public MatchServiceImplJdbc(MatchDAO matchDAO) {
+        this.matchDAO = matchDAO;
     }
 
     @Override
-    public Match getMatchById(int matchId)throws SQLException {
-       return matchDAO.getMatchById(matchId);
+    public List<Match> getAllMatches() throws SQLException{
+        return matchDAO.getAllMatches();
+    }
+
+    @Override
+    public Match getMatchById(int matchId) throws SQLException {
+        return matchDAO.getMatchById(matchId);
+    }
+
+    @Override
+    public Integer addMatch(Match match) throws SQLException {
+        return matchDAO.addMatch(match);
     }
 
     @Override
@@ -33,13 +37,8 @@ public class MatchServiceImplJdbc  implements MatchService{
 
     @Override
     public void deleteMatch(int matchId) throws SQLException{
-       matchDAO.deleteMatch(matchId);
+        matchDAO.deleteMatch(matchId);
+        
     }
-
-    @Override
-    public List<Match> getAllMatches() throws SQLException {
-      return matchDAO.getAllMatches();
-    }
-
 
 }
