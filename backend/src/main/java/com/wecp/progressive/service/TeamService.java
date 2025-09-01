@@ -7,22 +7,22 @@ import java.util.List;
 
 public interface TeamService {
 
-    List<Team> getAllTeams()throws SQLException;
+    List<Team> getAllTeams() throws SQLException;
 
-    int addTeam(Team team)throws SQLException;
+    int addTeam(Team team) throws SQLException;
 
-    List<Team> getAllTeamsSortedByName()throws SQLException;
+    List<Team> getAllTeamsSortedByName() throws SQLException;
 
-    default void emptyArrayList() throws SQLException{
+    default void emptyArrayList()throws SQLException {
     }
 
     //Do not implement these methods in TeamServiceImplArrayList.java class
-    default Team getTeamById(int teamId) throws SQLException{
+    default Team getTeamById(int teamId)throws SQLException {
         return null;
     }
 
-    default void updateTeam(Team team) throws SQLException{}
+    default void updateTeam(Team team)throws SQLException {}
 
-    default void deleteTeam(int teamId)throws SQLException {}
+    default void deleteTeam(int teamId) throws SQLException{}
 
 }
