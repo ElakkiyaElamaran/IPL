@@ -9,6 +9,7 @@ import com.wecp.progressive.entity.Team;
 import com.wecp.progressive.service.TeamService;
 
 public class TeamServiceImplJdbc implements TeamService {
+
     private TeamDAO teamDAO;
 
     public TeamServiceImplJdbc(TeamDAO teamDAO) {
@@ -17,32 +18,38 @@ public class TeamServiceImplJdbc implements TeamService {
 
     @Override
     public List<Team> getAllTeams() throws SQLException{
-
-        return teamDAO.getAllTeams();
+       return teamDAO.getAllTeams();
     }
 
     @Override
-    public int addTeam(Team team)throws SQLException {
+    public int addTeam(Team team) throws SQLException{
         return teamDAO.addTeam(team);
     }
 
     @Override
     public List<Team> getAllTeamsSortedByName() throws SQLException{
-       List<Team> sortedTeams=teamDAO.getAllTeams();
-       if(!sortedTeams.isEmpty())
-       {
-        sortedTeams.sort(Comparator.comparing(Team::getTeamName));
-       }
-       return sortedTeams;
+        List<Team> sortedTeams = teamDAO.getAllTeams();
+        if(!sortedTeams.isEmpty()){
+
+            sortedTeams.sort(Comparator.comparing(Team:: getTeamName));
+        }
+        return sortedTeams;
     }
+
     @Override
-    public void updateTeam(Team team) throws SQLException
-    {
+    public Team getTeamById(int teamId) throws SQLException{
+        return teamDAO.getTeamById(teamId);
+    }
+
+    @Override
+    public void updateTeam(Team team) throws SQLException{
         teamDAO.updateTeam(team);
+
     }
+
     @Override
-    public void deleteTeam(int teamId) throws SQLException
-    {
+    public void deleteTeam(int teamId)throws SQLException{
         teamDAO.deleteTeam(teamId);
     }
+
 }
