@@ -1,5 +1,8 @@
 package com.wecp.progressive.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CricketerRepository {
+import com.wecp.progressive.entity.Team;
+
+public interface TeamRepository extends JpaRepository<Team,Long>{
 }
