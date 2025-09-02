@@ -1,49 +1,52 @@
 package com.wecp.progressive.service.impl;
+
+import com.wecp.progressive.dao.TeamDAO;
+import com.wecp.progressive.entity.Team;
+import com.wecp.progressive.service.TeamService;
+
 import java.sql.SQLException;
+import java.util.Comparator;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+public class TeamServiceImplJdbc implements TeamService {
 
-import com.wecp.progressive.entity.Team;
-import com.wecp.progressive.repository.TeamRepository;
-import com.wecp.progressive.service.TeamService;
-@Service
-public class TeamServiceImplJpa implements TeamService {
+    private TeamDAO teamDAO;
 
-    @Autowired
-    private TeamRepository teamRepository;
-     @Override
-    public List<Team> getAllTeams() throws SQLException {
-        return teamRepository.findAll();
+    public TeamServiceImplJdbc(TeamDAO teamDAO) {
+        this.teamDAO = teamDAO;
     }
 
     @Override
-    public Team getTeamById(int teamId) throws SQLException {
-        return teamRepository.findById((long) teamId).orElse(null);
+    public List<Team> getAllTeams() throws SQLException {
+        return teamDAO.getAllTeams();
     }
 
     @Override
     public int addTeam(Team team) throws SQLException {
-        Team savedTeam = teamRepository.save(team);
-        return savedTeam.getTeamId();
-    }
-    
-    @Override
-    public void updateTeam(Team team) throws SQLException {
-        if (teamRepository.existsById((long) team.getTeamId())) {
-            teamRepository.save(team);
-        }
-    }
-    @Override
-    public void deleteTeam(int teamId) throws SQLException {
-        teamRepository.deleteById((long) teamId);
+        return teamDAO.addTeam(team);
     }
 
     @Override
     public List<Team> getAllTeamsSortedByName() throws SQLException {
-        List<Team> teams = teamRepository.findAll();
-        teams.sort((a, b) -> a.getTeamName().compareToIgnoreCase(b.getTeamName()));
-        return teams;
+        List<Team> sortedTeams = teamDAO.getAllTeams();
+        if (!sortedTeams.isEmpty()) {
+            sortedTeams.sort(Comparator.comparing(Team::getTeamName));
+        }
+        return sortedTeams;
+    }
+
+    @Override
+    public Team getTeamById(int teamId) throws SQLException {
+        return teamDAO.getTeamById(teamId);
+    }
+
+    @Override
+    public void updateTeam(Team team) throws SQLException {
+        teamDAO.updateTeam(team);
+    }
+
+    @Override
+    public void deleteTeam(int teamId) throws SQLException {
+        teamDAO.deleteTeam(teamId);
     }
 }
