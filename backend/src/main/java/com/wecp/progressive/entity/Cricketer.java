@@ -1,123 +1,110 @@
 package com.wecp.progressive.entity;
 
-import java.util.Comparator;
+import javax.persistence.*;
+import java.util.Date;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-@Entity
-public class Cricketer implements Comparable<Cricketer> {
+// Since "match" is a reserved word in mysql, using table name as "matches"
+@Entity(name = "matches")
+public class Match {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int cricketerId;
+    private int matchId;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "team_id")
-    private Team team;
+    @JoinColumn(name = "first_team_id")
+    private Team firstTeam;
 
-    private String cricketerName;
-    private int age;
-    private String nationality;
-    private int experience;
-    private String role;
-    private int totalRuns;
-    private int totalWickets;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "second_team_id")
+    private Team secondTeam;
 
-    public Cricketer() {
+    @Temporal(TemporalType.DATE)
+    private Date matchDate;
+
+    private String venue;
+    private String result;
+    private String status;
+
+    @ManyToOne
+    @JoinColumn(name = "winner_team_id")
+    private Team winnerTeam;
+
+    public Match() {
     }
 
-    public Cricketer(int cricketerId, int teamId, String cricketerName, int age, String nationality, int experience, String role, int totalRuns, int totalWickets) {
-        this.cricketerId = cricketerId;
-        this.team.setTeamId(teamId);
-        this.cricketerName = cricketerName;
-        this.age = age;
-        this.nationality = nationality;
-        this.experience = experience;
-        this.role = role;
-        this.totalRuns = totalRuns;
-        this.totalWickets = totalWickets;
+    public Match(int matchId, int firstTeamId, int secondTeamId, Date matchDate, String venue, String result, String status, int winnerTeamId) {
+        this.matchId = matchId;
+        this.firstTeam.setTeamId(firstTeamId);
+        this.secondTeam.setTeamId(secondTeamId);
+        this.matchDate = matchDate;
+        this.venue = venue;
+        this.result = result;
+        this.status = status;
+        this.winnerTeam.setTeamId(winnerTeamId);
     }
 
-    public int getCricketerId() {
-        return cricketerId;
+    public int getMatchId() {
+        return matchId;
     }
 
-    public void setCricketerId(int cricketerId) {
-        this.cricketerId = cricketerId;
+    public void setMatchId(int matchId) {
+        this.matchId = matchId;
     }
 
-    public Team getTeam() {
-        return team;
+    public Team getFirstTeam() {
+        return firstTeam;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
+    public void setFirstTeam(Team firstTeam) {
+        this.firstTeam = firstTeam;
     }
 
-    public String getCricketerName() {
-        return cricketerName;
+    public Team getSecondTeam() {
+        return secondTeam;
     }
 
-    public void setCricketerName(String cricketerName) {
-        this.cricketerName = cricketerName;
+    public void setSecondTeam(Team secondTeam) {
+        this.secondTeam = secondTeam;
     }
 
-    public int getAge() {
-        return age;
+    public Team getWinnerTeam() {
+        return winnerTeam;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setWinnerTeam(Team winnerTeam) {
+        this.winnerTeam = winnerTeam;
     }
 
-    public String getNationality() {
-        return nationality;
+    public Date getMatchDate() {
+        return matchDate;
     }
 
-    public void setNationality(String nationality) {
-        this.nationality = nationality;
+    public void setMatchDate(Date matchDate) {
+        this.matchDate = matchDate;
     }
 
-    public int getExperience() {
-        return experience;
+    public String getVenue() {
+        return venue;
     }
 
-    public void setExperience(int experience) {
-        this.experience = experience;
+    public void setVenue(String venue) {
+        this.venue = venue;
     }
 
-    public String getRole() {
-        return role;
+    public String getResult() {
+        return result;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setResult(String result) {
+        this.result = result;
     }
 
-    public int getTotalRuns() {
-        return totalRuns;
+    public String getStatus() {
+        return status;
     }
 
-    public void setTotalRuns(int totalRuns) {
-        this.totalRuns = totalRuns;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public int getTotalWickets() {
-        return totalWickets;
-    }
-
-    public void setTotalWickets(int totalWickets) {
-        this.totalWickets = totalWickets;
-    }
-
-    @Override
-    public int compareTo(Cricketer otherCricketer) {
-        return Comparator.comparingInt(Cricketer::getExperience)
-                .compare(this, otherCricketer);
-    }
 }
