@@ -9,7 +9,7 @@ public interface CricketerService {
 
     List<Cricketer> getAllCricketers() throws SQLException;
 
-    Integer addCricketer(Cricketer cricketer)  throws SQLException;
+    Integer addCricketer(Cricketer cricketer) throws SQLException;
 
     List<Cricketer> getAllCricketersSortedByExperience() throws SQLException;
 
@@ -17,16 +17,16 @@ public interface CricketerService {
     }
 
     //Do not implement these methods in CricketerServiceImplArraylist.java class
-    default void updateCricketer(Cricketer cricketer) throws SQLException{}
+    default void updateCricketer(Cricketer cricketer) throws SQLException {}
 
-    default void deleteCricketer(int cricketerId) throws SQLException{}
+    default void deleteCricketer(int cricketerId) throws SQLException {}
 
     default Cricketer getCricketerById(int cricketerId) throws SQLException {
         return null;
     }
 
     //Do not implement these methods in CricketerServiceImplArraylist.java and CricketerServiceImplJdbc.java class
-    default List<Cricketer> getCricketersByTeam(int teamId) throws SQLException{
+    default List<Cricketer> getCricketersByTeam(int teamId) {
         return null;
     }
 
