@@ -13,12 +13,5 @@ import java.util.List;
 @Repository
 public interface MatchRepository extends JpaRepository<Match, Integer> {
 
-    Match findByMatchId(int matchId);
-
-    List<Match> findAllByStatus(String status);
-
-    @Modifying
-    @Transactional
-    @Query("DELETE FROM matches m WHERE m.firstTeam.teamId = :teamId OR m.secondTeam.teamId = :teamId")
-    void deleteByTeamId(@Param("teamId") int teamId);
+    
 }
