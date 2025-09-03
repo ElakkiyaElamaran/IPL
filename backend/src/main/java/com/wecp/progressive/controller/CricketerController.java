@@ -1,85 +1,51 @@
 package com.wecp.progressive.controller;
 
 import com.wecp.progressive.entity.Cricketer;
-import com.wecp.progressive.entity.Team;
-import com.wecp.progressive.exception.TeamCricketerLimitExceededException;
-import com.wecp.progressive.service.impl.CricketerServiceImplJpa;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
-@RestController
-@RequestMapping("/cricketer")
-public class CricketerController {
 
-    @Autowired
-    CricketerServiceImplJpa cricketerServiceImplJpa;
+@RestController
+@RequestMapping("/cricketers")
+public class CricketerController {
 
     @GetMapping
     public ResponseEntity<List<Cricketer>> getAllCricketers() {
-        try {
-            List<Cricketer> cricketerList = cricketerServiceImplJpa.getAllCricketers();
-            return new ResponseEntity<>(cricketerList, HttpStatus.OK);
-        } catch (SQLException e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return ResponseEntity.ok(new ArrayList<>());
     }
 
-    @GetMapping("/{cricketerId}")
+    @GetMapping("/{id}")
     public ResponseEntity<Cricketer> getCricketerById(@PathVariable int cricketerId) {
-        try {
-            Cricketer cricketer = cricketerServiceImplJpa.getCricketerById(cricketerId);
-            return new ResponseEntity<>(cricketer, HttpStatus.OK);
-        } catch (SQLException e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return ResponseEntity.ok(null);
     }
 
     @PostMapping
     public ResponseEntity<Integer> addCricketer(@RequestBody Cricketer cricketer) {
-        try {
-            int cricketerId = cricketerServiceImplJpa.addCricketer(cricketer);
-            return new ResponseEntity<>(cricketerId, HttpStatus.CREATED);
-        }catch(TeamCricketerLimitExceededException t){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        } 
-        catch (SQLException e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return ResponseEntity.ok(0);
     }
 
-    @PutMapping("/{cricketerId}")
+    @PutMapping("/{id}")
     public ResponseEntity<Void> updateCricketer(@PathVariable int cricketerId, @RequestBody Cricketer cricketer) {
-        try {
-            cricketer.setCricketerId(cricketerId);
-            cricketerServiceImplJpa.updateCricketer(cricketer);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch (SQLException e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/{cricketerId}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCricketer(@PathVariable int cricketerId) {
-        try {
-            cricketerServiceImplJpa.deleteCricketer(cricketerId);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (SQLException e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/cricketer/team/{teamId}")
-    public ResponseEntity<List<Cricketer>> getCricketersByTeam(@PathVariable int teamId) {
-        try {
-            List<Cricketer> cricketerList = cricketerServiceImplJpa.getCricketersByTeam(teamId);
-            return new ResponseEntity<>(cricketerList, HttpStatus.OK);
-        } catch (SQLException e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    @GetMapping("/team/{teamId}")
+    public ResponseEntity<List<Cricketer>> getCricketersByTeam( @PathVariable int teamId) {
+        return ResponseEntity.ok(new ArrayList<>());
     }
 }
