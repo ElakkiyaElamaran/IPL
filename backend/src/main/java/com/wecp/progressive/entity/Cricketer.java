@@ -1,7 +1,5 @@
 package com.wecp.progressive.entity;
-
 import java.util.Comparator;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
