@@ -9,7 +9,7 @@ public interface MatchService {
 
     List<Match> getAllMatches() throws SQLException;
 
-    Match getMatchById(int matchId) throws SQLException;
+    Match getMatchById(int matchId) throws SQLException ;
 
     Integer addMatch(Match match) throws SQLException;
 
