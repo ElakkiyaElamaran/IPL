@@ -46,16 +46,15 @@ public class MatchServiceImplJpa implements MatchService {
 
     @Override
     public void deleteMatch(int matchId) throws SQLException {
-        matchRepository.deleteById(matchId);
-    }
+        ticketBookingRepository.deleteByMatchId(matchId);
+        matchRepository.deleteById(matchId);}
 
     @Override
-    public List<Match> getAllMatchesByStatus(String status) throws SQLException {
-        if(matchRepository.findAll().isEmpty())
-        {
-            throw new NoMatchesFoundException("no match found");
-        }
+    public List<Match> getAllMatchesByStatus(String status) throws NoMatchesFoundException {
         List<Match> matchList = matchRepository.findAllByStatus(status);
+        if (matchList.isEmpty()) {
+            throw new NoMatchesFoundException("No matches found with status = " + status);
+        }
         return matchList;
     }
 }

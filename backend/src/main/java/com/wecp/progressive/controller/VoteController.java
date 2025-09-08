@@ -1,3 +1,4 @@
+
 package com.wecp.progressive.controller;
 import com.wecp.progressive.entity.Vote;
 import com.wecp.progressive.service.impl.VoteServiceImpl;

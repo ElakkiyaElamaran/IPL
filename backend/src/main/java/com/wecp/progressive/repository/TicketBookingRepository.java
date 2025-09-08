@@ -1,3 +1,4 @@
+
 package com.wecp.progressive.repository;
 
 import java.util.List;
@@ -13,11 +14,12 @@ import com.wecp.progressive.entity.TicketBooking;
 
 @Repository
 public interface TicketBookingRepository extends JpaRepository<TicketBooking, Integer>{
+
     List<TicketBooking> findByEmail(String email);
 
     @Modifying
     @Transactional
-    @Query("DELETE FROM TicketBooking t WHERE t.match.matchId IN (SELECT m.matchId FROM Match m WHERE m.firstTeamId = :teamId OR m.secondTeamId = :teamId)")
+    @Query("DELETE FROM TicketBooking t WHERE t.match.matchId IN (SELECT m.matchId FROM Match m WHERE m.firstTeam.teamId = :teamId OR m.secondTeam.teamId = :teamId)")
     void deleteByTeamId(@Param("teamId") int teamId);
     
     @Modifying

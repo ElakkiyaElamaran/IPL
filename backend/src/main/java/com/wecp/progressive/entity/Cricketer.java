@@ -1,3 +1,4 @@
+
 package com.wecp.progressive.entity;
 
 import java.util.Comparator;
@@ -106,9 +107,7 @@ public class Cricketer implements Comparable<Cricketer>{
     }
     @Override
     public int compareTo(Cricketer o) {
-    // //  return o.experience >= experience ? -1 :0;   
-    // return Comparator.comparingInt(Cricketer::getExperience)
-    //                   .compare(this,o);
+   
         return Integer.compare(this.experience, o.getExperience());
     }
     

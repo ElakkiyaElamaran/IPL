@@ -1,3 +1,4 @@
+
 package com.wecp.progressive.repository;
 
 import com.wecp.progressive.entity.Match;
@@ -19,6 +20,6 @@ public interface MatchRepository extends JpaRepository<Match, Integer> {
 
     @Modifying
     @Transactional
-    @Query("DELETE FROM Match m WHERE m.firstTeamId = :teamId OR m.secondTeamId = :teamId")
+    @Query("DELETE FROM Match m WHERE m.firstTeam.teamId = :teamId OR m.secondTeam.teamId = :teamId")
     void deleteByTeamId(@Param("teamId") int teamId);
 }
