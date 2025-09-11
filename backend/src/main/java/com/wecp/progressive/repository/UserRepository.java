@@ -1,3 +1,4 @@
+
 package com.wecp.progressive.repository;
 
 
@@ -9,5 +10,5 @@ public interface UserRepository extends JpaRepository<User,Integer>{
 
     User findByUsername(String username);
 
-    // User findByEmail(String email);
+    User findByEmail(String email);
 }

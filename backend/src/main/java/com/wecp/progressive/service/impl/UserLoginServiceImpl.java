@@ -20,8 +20,8 @@ import java.util.Optional;
 public class UserLoginServiceImpl implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
-    // @Autowired
-    // private PasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     
     // @Autowired
     // public UserLoginServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
@@ -38,15 +38,15 @@ public class UserLoginServiceImpl implements UserDetailsService {
     }
 
     public User createUser(User user) throws Exception{
-        // User oldUser = userRepository.findByUsername(user.getUsername());
-        // // User emailExists = userRepository.findByEmail(user.getEmail());
-        // if(oldUser != null){
-        //     throw new Exception("User name is Unavailable: " + user.getUsername());
-        // }
-        // if(emailExists != null){
-        //     throw new Exception("User already exists with the given email: "+user.getEmail());
-        // }
-        // user.setPassword(passwordEncoder.encode(user.getPassword()));
+        User oldUser = userRepository.findByUsername(user.getUsername());
+        User emailExists = userRepository.findByEmail(user.getEmail());
+        if(oldUser != null){
+            throw new Exception("User name is Unavailable: " + user.getUsername());
+        }
+        if(emailExists != null){
+            throw new Exception("User already exists with the given email: "+user.getEmail());
+        }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
