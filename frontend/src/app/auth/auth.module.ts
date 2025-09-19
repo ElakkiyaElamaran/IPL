@@ -1,26 +1,29 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
-// import { AppComponent } from './app.component';
-import { AppRoutingModule } from '../app-routing.module';
-import { AppComponent } from '../app.component';
-import { LoginComponent } from './components/login/login.component';
-import { RegistrationComponent } from './components/registration/registration.component';
-import { ReactiveFormsModule } from '@angular/forms';
-// import { AppRoutingModule } from './app-routing.module';  
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+
+import { AuthRoutingModule } from "./auth-routing.module";
+import { ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
+import { RegistrationComponent } from "./components/registration/registration.component";
+import { LoginComponent } from "./components/login/login.component";
+import { LogoutComponent } from "./components/logout/logout.component";
+import { RouterModule } from "@angular/router";
 
 @NgModule({
-  declarations: [
+  declarations: [RegistrationComponent,
     LoginComponent,
-    RegistrationComponent
+    LogoutComponent
+
   ],
   imports: [
-    BrowserModule,
+    CommonModule,
+    AuthRoutingModule,
+    ReactiveFormsModule,
     HttpClientModule,
-    AppRoutingModule ,
-    ReactiveFormsModule
+    RouterModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  exports: [
+    LogoutComponent
+  ]
 })
 export class AuthModule {}

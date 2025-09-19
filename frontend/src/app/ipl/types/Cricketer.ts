@@ -1,8 +1,7 @@
-// import { Team } from './Team';
+import { Team } from './Team';
 
 export class Cricketer {
     cricketerId: number;
-    teamId:number;
     cricketerName: string;
     age: number;
     nationality: string;
@@ -10,11 +9,10 @@ export class Cricketer {
     role: string;
     totalRuns: number;
     totalWickets: number;
-    // team: Team;  // Establish ManyToOne relationship
+    team: Team;  // Establish ManyToOne relationship
 
     constructor(
         cricketerId: number,
-        teamId:number,
         cricketerName: string,
         age: number,
         nationality: string,
@@ -22,10 +20,9 @@ export class Cricketer {
         role: string,
         totalRuns: number,
         totalWickets: number,
-        // team: Team
+        team: Team
     ) {
         this.cricketerId = cricketerId;
-        this.teamId= teamId;
         this.cricketerName = cricketerName;
         this.age = age;
         this.nationality = nationality;
@@ -33,12 +30,12 @@ export class Cricketer {
         this.role = role;
         this.totalRuns = totalRuns;
         this.totalWickets = totalWickets;
-        // this.team = team;  // Link cricketer to a team
+        this.team = team;  // Link cricketer to a team
     }
 
     displayInfo() {
         console.log(`Cricketer ID: ${this.cricketerId}`);
-        console.log(`Team ID: ${this.teamId}`);
+        console.log(`Team: ${this.team.teamName}`);
         console.log(`Cricketer Name: ${this.cricketerName}`);
     }
 }
