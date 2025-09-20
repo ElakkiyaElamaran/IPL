@@ -12,20 +12,17 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   errorMessage: string | null = null;
-
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router
     ) {}
-
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       username: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/)]],
       password: ['', [Validators.required, Validators.minLength(8)]]
     });
   }
-
   onSubmit(): void {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).pipe(
@@ -47,5 +44,4 @@ export class LoginComponent implements OnInit {
       this.errorMessage = 'Please fill out the form correctly.';
     }
   }
-
 }
