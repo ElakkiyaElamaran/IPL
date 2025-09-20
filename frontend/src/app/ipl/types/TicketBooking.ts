@@ -1,23 +1,21 @@
-
-// import { Match } from "./Match";
+import { Match } from "./Match";
 
 export class TicketBooking {
 
     bookingId: number;
     email: string;
-    // match: Match;
-    matchId:number;
+    match: Match;
     numberOfTickets: number;
 
     constructor(
         bookingId: number,
         email: string,
-        matchId: number,
+        match: Match,
         numberOfTickets: number
     ) {
         this.bookingId = bookingId;
         this.email = email;
-        this.matchId = matchId;
+        this.match = match;
         this.numberOfTickets = numberOfTickets;
     }
 

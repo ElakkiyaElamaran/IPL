@@ -1,33 +1,26 @@
-
-// import { Cricketer } from "./Cricketer";
-// import { Team } from "./Team";
+import { Cricketer } from "./Cricketer";
+import { Team } from "./Team";
 
 export class Vote {
 
     voteId: number;
     email: string;
     category: string;
-    // cricketer: Cricketer;
-    // team: Team;
-    cricketerId:number;
-    teamId:number
+    cricketer: Cricketer;
+    team: Team;
 
     constructor(
         voteId: number,
         email: string,
         category: string,
-        // cricketer: Cricketer,
-        // team: Team
-        cricketerId:number,
-        teamId:number
+        cricketer: Cricketer,
+        team: Team
     ) {
         this.voteId = voteId;
         this.email = email;
         this.category = category;
-        // this.cricketer = cricketer;
-        // this.team = team;
-        this.cricketerId=cricketerId;
-        this.teamId=teamId;
+        this.cricketer = cricketer;
+        this.team = team;
     }
 
     displayInfo() {
